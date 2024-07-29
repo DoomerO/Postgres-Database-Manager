@@ -1,0 +1,37 @@
+{
+    "yesOrNo" : "Type a value corresponding to [y/n]:",
+    "configConfirm" : "Do you wish to use the default configurations",
+    "connectTitle" : "Connection",
+    "connectSuccess" : "Connection Established!!",
+    "connectFail" : "Connection Failed...",
+    "connectConfigMsg" : "Type 'def' to use default",
+    "connectionInfo": {
+        "host" : "Host:",
+        "port" : "Port:",
+        "password" : "Password:",
+        "user" : "User:",
+        "dbname" : "Database Name:"
+    },
+    "langConfigTitle" : "Language Alteration",
+    "langConfig": "Type the code refering to the language you want to use:",
+    "langsCode" : {
+        "english" : "1 - English",
+        "portuguese" : "2 - Portuguese",
+        "error" : "Type a code corresponding to the languages above!"
+    },
+    "mainMenuTitle": "Main Menu",
+    "mainMenuSelect": "Type the code corresponding to the function that you want to use:",
+    "mainMenuAllert": "Type a code corresponding to any of the above!",
+    "mainMenuOpts": {
+        "connect": "1 - Connect With the Database",
+        "lang": "2 - Change the Application's Language",
+        "end": "3 - Close the Application"
+    },
+    "closeMsg": "Closing the connections and the application...",
+    "orptTitle": "Operations",
+    "oprtMsg" : "Type the operation script:",
+    "oprtMsgBack" : "Type 'ext/esc' to get back to the main menu",
+    "oprtFail" : "The operation have failed",
+    "oprtNewOprt": "Do you wish to do another operation",
+    "easyWayOut": "Type any value to continue:"
+}

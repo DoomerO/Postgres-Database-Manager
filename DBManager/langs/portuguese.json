@@ -1,0 +1,37 @@
+{
+    "yesOrNo" : "Digite um valor correspondendo a [s/n]:",
+    "configConfirm" : "Voce deseja usar as configuracoes padroes",
+    "connectTitle" : "Conexao",
+    "connectSuccess" : "Conexao Estabelecida!!",
+    "connectFail" : "Conexao Falhou...",
+    "connectConfigMsg" : "Digite 'def' para usar o padrao",
+    "connectionInfo": {
+        "host" : "Endereco:",
+        "port" : "Porta:",
+        "password" : "Senha:",
+        "user" : "Usuario:",
+        "dbname" : "Nome do Banco de Dados:"
+    },
+    "langConfigTitle" : "Alteracao de Linguagem",
+    "langConfig": "Digite o codigo referente a lingua que voce deseja usar:",
+    "langsCode" : {
+        "english" : "1 - Ingles",
+        "portuguese" : "2 - Portugues",
+        "error" : "Digite um codigo correspodente as linguas!"
+    },
+    "mainMenuTitle": "Menu Principal",
+    "mainMenuSelect": "Digite um codigo correspodente a funcionalidade que voce quer utilizar:",
+    "mainMenuAllert": "Digite um codigo correspondendo aos acima!",
+    "mainMenuOpts": {
+        "connect": "1 - Conectar Com Banco de Dados",
+        "lang": "2 - Alterar Linguagem da Aplicacao",
+        "end": "3 - Sair da Aplicacao"
+    },
+    "closeMsg": "Encerrando conexoes e fechando a aplicacao...",
+    "oprtTitle": "Operacoes",
+    "oprtMsg" : "Digite o script da operacao que deseja fazer:",
+    "oprtMsgBack" : "Digite 'ext/esc' para voltar ao menu principal",
+    "oprtFail" : "A Operacao falhou",
+    "oprtNewOprt": "Voce deseja realizar outra operacao",
+    "easyWayOut": "Digite qualquer valor para continuar:"
+}
