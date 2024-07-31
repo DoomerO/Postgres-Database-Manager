@@ -31,7 +31,10 @@
     "oprtTitle": "Operacoes",
     "oprtMsg" : "Digite o script da operacao que deseja fazer:",
     "oprtMsgBack" : "Digite 'ext/esc' para voltar ao menu principal",
+    "oprtMsgConfirmAlt" : "Deseja gravar as alteracoes no banco de dados",
     "oprtFail" : "A Operacao falhou",
+    "oprtSuccess" : "A Operacao opteve sucesso!",
+    "oprtErrorNeedCommit" : "Esse erro so pode ser corrigido salvando qualquer alteração feita anteriormente! Se nao salvas sera necessaria uma nova conexao!\nVoce deseja salvar as mudancas?",
     "oprtNewOprt": "Voce deseja realizar outra operacao",
     "easyWayOut": "Digite qualquer valor para continuar:"
 }

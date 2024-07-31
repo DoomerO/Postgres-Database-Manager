@@ -53,7 +53,7 @@ def mainMenu():
         print(f'{lang['mainMenuOpts']['lang']}\n')
         print(f'{lang['mainMenuOpts']['end']}\n')
         while True: 
-            opt = input(f'{lang['mainMenuSelect']}');
+            opt = input(f'{lang['mainMenuSelect']}')
             if(opt == '1'):
                 setup()
                 break
@@ -76,11 +76,11 @@ def mainMenu():
         
 def yorN(msg):
     while True:
-        opt = input(f'{msg}? [y/n]:');
+        opt = input(f'{msg}? [y/n]:')
         if (opt not in "YySsNn"):
             opt = input(lang['yesOrNo'])
         else:
-            break;
+            break
 
     return True if opt in "YySs" else False
 
@@ -108,24 +108,25 @@ def setup():
         print(config['connection']['host'])
         connectDB(config['connection']['host'], config['connection']['port'], config['connection']['password'], config['connection']['user'], config['connection']['dbname'])
     else:
-        clear();
-        mainPrint();
-        customConfig();
+        clear()
+        mainPrint()
+        customConfig()
 
 def connectDB(host, port, password, user, dbname):
     clear()
     mainPrint()
     global conn, cur
     try :
-        connect = psycopg2.connect(f'host={host} port={port} password={password} user={user} dbname={dbname}');
+        connect = psycopg2.connect(f'host={host} port={port} password={password} user={user} dbname={dbname}')
         conn = connect
         cur = conn.cursor()
         print(f'{localcolor[6]}{lang['connectSuccess']}{localcolor[2]}')
+        input(lang['easyWayOut'])
         oprtMenu()
     except Exception as e:
         print(f'{localcolor[5]}{lang['connectFail']}{localcolor[2]}\n')
         print(f'{localcolor[5]}ERROR ->{localcolor[7]} {e}{localcolor[2]}')
-    easyWayOut = input(lang['easyWayOut'])
+        input(lang['easyWayOut'])
 
 def setLangMenu():
     clear()
@@ -146,14 +147,17 @@ def setLangMenu():
             print(f'{localcolor[5]}{lang['langsCode']['error']}{localcolor[2]}\n')
             
 def oprtMenu():
-    clear()
-    mainPrint()
-    global cur
-    print(f'{localcolor[8]}-->{lang['oprtTitle']}{localcolor[2]}\n')
-    print(f'{localcolor[7]}INFO -> {lang['oprtMsgBack']}{localcolor[2]}\n')
     while True:
-        oprt = input(f'{lang['oprtMsg']}\n{localcolor[10]}')
+        clear()
+        mainPrint()
+        global cur, conn
+        error = False
+        print(f'{localcolor[8]}-->{lang['oprtTitle']}{localcolor[2]}\n')
+        print(f'{localcolor[7]}INFO -> {lang['oprtMsgBack']}{localcolor[2]}\n')
+        oprt = input(f'\n{lang['oprtMsg']}\n{localcolor[10]}')
         if (oprt in "escext"):
+            conn.close()
+            cur.close()
             break
         print(localcolor[2])
         try:
@@ -163,10 +167,21 @@ def oprtMenu():
                 for row in rows:
                     print(f'{row}\n')
         except Exception as e:
+            error = True
             print(f'{localcolor[5]}{lang['oprtFail']}{localcolor[2]}\n')
             print(f'{localcolor[5]}ERROR ->{localcolor[7]} {e}{localcolor[2]}')
-            
-        if (not yorN(lang['oprtNewOprt'])):
-            break
+            if ("current transaction is aborted, commands ignored until end of transaction block" in str(e)):
+                if(yorN(f'{localcolor[7]}\nINFO ->{lang['oprtErrorNeedCommit']}{localcolor[2]}')):
+                    conn.commit()
+                else:
+                    conn.close()
+                    cur.close()
+                    break
+        if (not error) :
+            print(f'{localcolor[6]}{lang['oprtSuccess']}{localcolor[2]}\n')
         
+        if (not yorN(lang['oprtNewOprt'])):
+            if(yorN(f'\n{lang['oprtMsgConfirmAlt']}')):
+                conn.commit()
+            break
 main()

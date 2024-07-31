@@ -31,7 +31,10 @@
     "orptTitle": "Operations",
     "oprtMsg" : "Type the operation script:",
     "oprtMsgBack" : "Type 'ext/esc' to get back to the main menu",
+    "oprtMsgConfirmAlt" : "Do you wish to save the alterations on the database?",
     "oprtFail" : "The operation have failed",
+    "oprtSuccess" : "The operation had been successfull!",
+    "oprtErrorNeedCommit" : "This error can only be solved by saving all changes made before! If not, it will be necessary to establish a new connection!\nDo you wish to save these changes?",
     "oprtNewOprt": "Do you wish to do another operation",
     "easyWayOut": "Type any value to continue:"
 }
