@@ -28,7 +28,7 @@
         "end": "3 - Close the Application"
     },
     "closeMsg": "Closing the connections and the application...",
-    "orptTitle": "Operations",
+    "oprtTitle": "Operations",
     "oprtMsg" : "Type the operation script:",
     "oprtMsgBack" : "Type 'ext/esc' to get back to the operation menu",
     "oprtMsgConfirmAlt" : "Do you wish to save the alterations on the database?",

@@ -184,7 +184,6 @@ def oprtMenu():
         print(f'{localcolor[7]}INFO -> {lang['oprtMsgBack']}{localcolor[2]}\n')
         oprt = input(f'\n{lang['oprtMsg']}\n{localcolor[10]}')
         if (oprt in "escext"):
-            endConnection()
             break
         print(localcolor[2])
         try:
@@ -216,12 +215,17 @@ def saveOprtMenu():
         error = False
         mainPrint()
         print(f'{localcolor[8]}-->{lang['oprtSaveTitle']}{localcolor[2]}\n')
+        print(f'{localcolor[7]}INFO -> {lang['oprtMsgBack']}{localcolor[2]}\n')
         oprt = input(f'{lang['oprtSaveInput']}\n{localcolor[10]}')
         oprtTitle = input(f'{localcolor[2]}{lang['oprtSaveTitleInput']}\n{localcolor[10]}')
+        
+        if (oprt in "escext" or oprtTitle in "escext"):
+            break
+        
         print(localcolor[2])
         try :
             with open(config['savePath'], 'a') as file:
-                file.write(f'{oprtTitle}##{oprt}')
+                file.write(f'{oprtTitle}##{oprt}\n')
         except Exception as e:
             error = True
             print(f'{localcolor[5]}{lang['oprtSaveError']}{localcolor[2]}\n')
@@ -245,11 +249,15 @@ def useSavedOprtMenu():
         error = False
         mainPrint()
         print(f'{localcolor[8]}-->{lang['oprtUseSaveTitle']}{localcolor[2]}\n')
+        print(f'{localcolor[7]}INFO -> {lang['oprtMsgBack']}{localcolor[2]}\n')
         
         for oprt in scriptLines:
             print(f'{localcolor[9]}{scriptLines.index(oprt) + 1} -> {oprt[0]}\n{localcolor[10]}{oprt[1]}{localcolor[2]}\n')
         
         oprtId = input(f'{lang['oprtUseSaveIndex']}\n')
+        
+        if (oprtId in "escext"):
+            break
         
         oprtCommand = str(scriptLines[int(oprtId) - 1][1])
         try:
