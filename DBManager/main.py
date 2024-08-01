@@ -28,15 +28,29 @@ def getConfig():
 def getLang(arg):
     with open(f'./langs/{arg}.json', 'r') as file:
         return json.load(file)
+    
+def getSavedScript():
+    with open(config['savePath']) as file:
+        return file.readlines()
+
+def endConnection():
+    global conn, cur
+    if (conn):
+        conn.close()
+    if (cur):
+        cur.close()
 
 config = getConfig()
 
 lang = getLang(config['lang'])
 
 def mainPrint():
+    clear()
     print(f'{localcolor[11]}{localcolor[9]}=============================PG MANAGER===============================\n{localcolor[2]}')
 
 def clear():
+    
+
     os.system('cls' if os.name == 'nt' else 'clear')
 
 def main():
@@ -46,7 +60,6 @@ def main():
     
 def mainMenu():
     while True:
-        clear()
         mainPrint()
         print(f'{localcolor[8]}-->{lang['mainMenuTitle']}{localcolor[2]}\n')
         print(f'{lang['mainMenuOpts']['connect']}\n')
@@ -64,13 +77,10 @@ def mainMenu():
                 global closeApp 
                 closeApp = True
                 print(f'\n{localcolor[7]}###{lang['closeMsg']}###{localcolor[2]}\n')
-                if conn:
-                    conn.close()
-                if cur:
-                    conn.close()
+                endConnection()
                 break
             else:
-                print(f'{localcolor[7]}{lang['mainMenuAllert']}{localcolor[2]}')
+                print(f'{localcolor[7]}{lang['mainMenuAlert']}{localcolor[2]}')
         if closeApp:
             break
         
@@ -101,7 +111,6 @@ def customConfig():
     connectDB(host, port, password, user, dbname)
 
 def setup():
-    clear()
     mainPrint()
     print(f'{localcolor[8]}-->{lang['connectTitle']}{localcolor[2]}\n')
     if (yorN(lang['configConfirm'])):
@@ -113,23 +122,21 @@ def setup():
         customConfig()
 
 def connectDB(host, port, password, user, dbname):
-    clear()
     mainPrint()
     global conn, cur
     try :
         connect = psycopg2.connect(f'host={host} port={port} password={password} user={user} dbname={dbname}')
         conn = connect
         cur = conn.cursor()
-        print(f'{localcolor[6]}{lang['connectSuccess']}{localcolor[2]}')
+        print(f'{localcolor[6]}{lang['connectSuccess']}{localcolor[2]}\n')
         input(lang['easyWayOut'])
-        oprtMenu()
+        slctOprMenu()
     except Exception as e:
         print(f'{localcolor[5]}{lang['connectFail']}{localcolor[2]}\n')
         print(f'{localcolor[5]}ERROR ->{localcolor[7]} {e}{localcolor[2]}')
         input(lang['easyWayOut'])
 
 def setLangMenu():
-    clear()
     mainPrint()
     global lang
     print(f'{localcolor[8]}-->{lang['langConfigTitle']}{localcolor[2]}\n')
@@ -146,18 +153,38 @@ def setLangMenu():
         else:
             print(f'{localcolor[5]}{lang['langsCode']['error']}{localcolor[2]}\n')
             
-def oprtMenu():
-    while True:
-        clear()
+def slctOprMenu():
+    while True: 
         mainPrint()
-        global cur, conn
+        print(f'{localcolor[8]}-->{lang['oprtSlctTitle']}{localcolor[2]}\n') 
+        print(f'{lang['oprtSlctOpts']['console']}\n')
+        print(f'{lang['oprtSlctOpts']['load']}\n')
+        print(f'{lang['oprtSlctOpts']['save']}\n')
+        print(f'{lang['oprtSlctOpts']['exit']}\n')
+        opt = input(f'{lang['mainMenuSelect']}')
+        if(opt == '1'):
+            oprtMenu()
+        if(opt == '2'):
+            useSavedOprtMenu()
+        if(opt == '3'):
+           saveOprtMenu()
+        if(opt == '4'):
+            print(f'\n{localcolor[7]}INFO ->{lang['oprtSlctExitMsg']}{localcolor[2]}\n')
+            endConnection()
+            break
+        else:
+            print(f'{localcolor[7]}{lang['mainMenuAlert']}{localcolor[2]}')
+
+def oprtMenu():
+    global cur, conn
+    while True:
         error = False
+        mainPrint()
         print(f'{localcolor[8]}-->{lang['oprtTitle']}{localcolor[2]}\n')
         print(f'{localcolor[7]}INFO -> {lang['oprtMsgBack']}{localcolor[2]}\n')
         oprt = input(f'\n{lang['oprtMsg']}\n{localcolor[10]}')
         if (oprt in "escext"):
-            conn.close()
-            cur.close()
+            endConnection()
             break
         print(localcolor[2])
         try:
@@ -174,8 +201,7 @@ def oprtMenu():
                 if(yorN(f'{localcolor[7]}\nINFO ->{lang['oprtErrorNeedCommit']}{localcolor[2]}')):
                     conn.commit()
                 else:
-                    conn.close()
-                    cur.close()
+                    endConnection()
                     break
         if (not error) :
             print(f'{localcolor[6]}{lang['oprtSuccess']}{localcolor[2]}\n')
@@ -184,4 +210,70 @@ def oprtMenu():
             if(yorN(f'\n{lang['oprtMsgConfirmAlt']}')):
                 conn.commit()
             break
+
+def saveOprtMenu():
+    while True:
+        error = False
+        mainPrint()
+        print(f'{localcolor[8]}-->{lang['oprtSaveTitle']}{localcolor[2]}\n')
+        oprt = input(f'{lang['oprtSaveInput']}\n{localcolor[10]}')
+        oprtTitle = input(f'{localcolor[2]}{lang['oprtSaveTitleInput']}\n{localcolor[10]}')
+        print(localcolor[2])
+        try :
+            with open(config['savePath'], 'a') as file:
+                file.write(f'{oprtTitle}##{oprt}')
+        except Exception as e:
+            error = True
+            print(f'{localcolor[5]}{lang['oprtSaveError']}{localcolor[2]}\n')
+            print(f'{localcolor[5]}ERROR ->{localcolor[7]} {e}{localcolor[2]}')
+            break
+        
+        if (not error) :    
+            print(f'{localcolor[6]}{lang['oprtSaveSuccess']}{localcolor[2]}\n')
+            
+        if (not yorN(lang['oprtSaveConfirm'])):
+            break
+        
+def useSavedOprtMenu():
+    global conn, cur
+    savedScripts = getSavedScript()
+    scriptLines = []
+    for line in savedScripts:
+        scriptLines.append(line.split('##'))
+        
+    while True:
+        error = False
+        mainPrint()
+        print(f'{localcolor[8]}-->{lang['oprtUseSaveTitle']}{localcolor[2]}\n')
+        
+        for oprt in scriptLines:
+            print(f'{localcolor[9]}{scriptLines.index(oprt) + 1} -> {oprt[0]}\n{localcolor[10]}{oprt[1]}{localcolor[2]}\n')
+        
+        oprtId = input(f'{lang['oprtUseSaveIndex']}\n')
+        
+        oprtCommand = str(scriptLines[int(oprtId) - 1][1])
+        try:
+            cur.execute(oprtCommand)
+            if ("select" in oprtCommand or "SELECT" in oprtCommand):
+                rows = cur.fetchall()
+                for row in rows:
+                    print(f'{row}\n')
+        except Exception as e:
+            error = True
+            print(f'{localcolor[5]}{lang['oprtFail']}{localcolor[2]}\n')
+            print(f'{localcolor[5]}ERROR ->{localcolor[7]} {e}{localcolor[2]}')
+            if ("current transaction is aborted, commands ignored until end of transaction block" in str(e)):
+                if(yorN(f'{localcolor[7]}\nINFO ->{lang['oprtErrorNeedCommit']}{localcolor[2]}')):
+                    conn.commit()
+                else:
+                    endConnection()
+                    break
+        if (not error) :
+            print(f'{localcolor[6]}{lang['oprtSuccess']}{localcolor[2]}\n')
+        
+        if (not yorN(lang['oprtNewOprt'])):
+            if(yorN(f'\n{lang['oprtMsgConfirmAlt']}')):
+                conn.commit()
+            break
+        
 main()

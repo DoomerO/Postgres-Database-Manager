@@ -21,7 +21,7 @@
     },
     "mainMenuTitle": "Menu Principal",
     "mainMenuSelect": "Digite um codigo correspodente a funcionalidade que voce quer utilizar:",
-    "mainMenuAllert": "Digite um codigo correspondendo aos acima!",
+    "mainMenuAlert": "Digite um codigo correspondendo aos acima!",
     "mainMenuOpts": {
         "connect": "1 - Conectar Com Banco de Dados",
         "lang": "2 - Alterar Linguagem da Aplicacao",
@@ -30,11 +30,27 @@
     "closeMsg": "Encerrando conexoes e fechando a aplicacao...",
     "oprtTitle": "Operacoes",
     "oprtMsg" : "Digite o script da operacao que deseja fazer:",
-    "oprtMsgBack" : "Digite 'ext/esc' para voltar ao menu principal",
+    "oprtMsgBack" : "Digite 'ext/esc' para voltar ao menu de operacoes",
     "oprtMsgConfirmAlt" : "Deseja gravar as alteracoes no banco de dados",
     "oprtFail" : "A Operacao falhou",
     "oprtSuccess" : "A Operacao opteve sucesso!",
     "oprtErrorNeedCommit" : "Esse erro so pode ser corrigido salvando qualquer alteração feita anteriormente! Se nao salvas sera necessaria uma nova conexao!\nVoce deseja salvar as mudancas?",
     "oprtNewOprt": "Voce deseja realizar outra operacao",
-    "easyWayOut": "Digite qualquer valor para continuar:"
+    "easyWayOut": "Digite qualquer valor para continuar:",
+    "oprtSlctTitle": "Operacoes a fazer",
+    "oprtSlctOpts": {
+        "console": "1 - Console de operacoes",
+        "load": "2 - Usar operacoes salvas",
+        "save": "3 - Salvar uma nova operacao",
+        "exit": "4 - Voltar a o menu principal"
+    },
+    "oprtSlctExitMsg": "Retornando ao Menu Principal...",
+    "oprtSaveTitle": "Salvar Scripts de Operacao",
+    "oprtSaveInput": "Digite a operacao que deseja salvar:",
+    "oprtSaveTitleInput": "Digite um titulo para essa operacao:",
+    "oprtSaveError": "Um erro ocorreu ao salvar:",
+    "oprtSaveSuccess": "A operacao foi salva com sucesso!",
+    "oprtSaveConfirm": "Deseja salvar outra operacao",
+    "oprtUseSaveTitle": "Operacoes Salvas",
+    "oprtUseSaveIndex": "Digite o codigo da operacao que deseja usar:"
 }

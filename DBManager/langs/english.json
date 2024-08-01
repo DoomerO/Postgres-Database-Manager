@@ -21,7 +21,7 @@
     },
     "mainMenuTitle": "Main Menu",
     "mainMenuSelect": "Type the code corresponding to the function that you want to use:",
-    "mainMenuAllert": "Type a code corresponding to any of the above!",
+    "mainMenuAlert": "Type a code corresponding to any of the above!",
     "mainMenuOpts": {
         "connect": "1 - Connect With the Database",
         "lang": "2 - Change the Application's Language",
@@ -30,11 +30,27 @@
     "closeMsg": "Closing the connections and the application...",
     "orptTitle": "Operations",
     "oprtMsg" : "Type the operation script:",
-    "oprtMsgBack" : "Type 'ext/esc' to get back to the main menu",
+    "oprtMsgBack" : "Type 'ext/esc' to get back to the operation menu",
     "oprtMsgConfirmAlt" : "Do you wish to save the alterations on the database?",
     "oprtFail" : "The operation have failed",
     "oprtSuccess" : "The operation had been successfull!",
     "oprtErrorNeedCommit" : "This error can only be solved by saving all changes made before! If not, it will be necessary to establish a new connection!\nDo you wish to save these changes?",
     "oprtNewOprt": "Do you wish to do another operation",
-    "easyWayOut": "Type any value to continue:"
+    "easyWayOut": "Type any value to continue:",
+    "oprtSlctTitle": "Operations",
+    "oprtSlctOpts": {
+        "console": "1 - Operation Prompt",
+        "load": "2 - Load Saved Operations",
+        "save": "3 - Save a New Operation",
+        "exit": "4 - Return To the Main Menu"
+    },
+    "oprtSlctExitMsg": "Returning to the Main Menu...",
+    "oprtSaveTitle": "Save Operation Script",
+    "oprtSaveInput": "Write the operation that you want to save:",
+    "oprtSaveTitleInput": "Write a title to this operation:",
+    "oprtSaveError": "An error has ocorried while saving:",
+    "oprtSaveSuccess": "The operation was successfully saved!",
+    "oprtSaveConfirm": "Do you wish to save another operation",
+    "oprtUseSaveTitle": "Saved Operations",
+    "oprtUseSaveIndex": "Type the code for the operation that you want to use:"
 }
